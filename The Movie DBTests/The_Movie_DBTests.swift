@@ -9,28 +9,65 @@ import XCTest
 @testable import The_Movie_DB
 
 class The_Movie_DBTests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    
+    var presenter: MoviePresenterInput & MoviePresenterOutput = MoviePresenter()
+    var interactor: MovieInteractorProtocol! = MovieInteractor()
+    var router: MovieRouterProtocol! = MovieDBRouter()
+    var view: MovieViewProtocol! = ViewController()
+    
+    var presenterMovie: MovieByGenrePresenterInput & MovieByGenrePresenterOutput = MovieByGenrePresenter()
+    var interactorMovie: MovieByGenreInteractorProtocol! = MovieByGenreInteractor()
+    var routerMovie: MovieByGenreRouterProtocol! = MovieByGenreRouter()
+    var viewMovie: MovieByGenreViewProtocol! = MovieByGenreView()
+    
+    var presenterMovieDetail: MovieDetailPresenterInput & MovieDetailPresenterOutput = MovieDetailPresenter()
+    var interactorMovieDetail: MovieDetailInteractorProtocol! = MovieDetailInteractor()
+    var routerMovieDetail: MovieDetailRouterProtocol! = MovieDetailRouter()
+    var viewMovieDetail: MovieDetailViewProtocol! = MovieDetailView()
+    
+    override func setUp() {
+        super.setUp()
+        
+        self.interactor.presenter = presenter
+        self.presenter.router = router
+        self.presenter.interactor = interactor
+        self.presenter.view = view
+        
+        self.interactorMovie.presenter = presenterMovie
+        self.presenterMovie.router = routerMovie
+        self.presenterMovie.interactor = interactorMovie
+        self.presenterMovie.view = viewMovie
+        
+        self.interactorMovieDetail.presenter = presenterMovieDetail
+        self.presenterMovieDetail.router = routerMovieDetail
+        self.presenterMovieDetail.interactor = interactorMovieDetail
+        self.presenterMovieDetail.view = viewMovieDetail
+        
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    
+    func test() {
+        
+        interactor.movieGenre = [MovieGenre(id: 1, name: "Action")]
+        XCTAssertEqual(presenter.genreTotal(), 1)
+        XCTAssertEqual(presenter.genreName(at: IndexPath(row: 0, section: 0)), "Action")
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    
+    func test_movie_by_genre() {
+        
+        interactorMovie.movies = [Movie(id: 1, original_title: "The Avengers"), Movie(id: 2, original_title: "Top Gun: Maverick")]
+        XCTAssertEqual(presenterMovie.movieTotal(), 2)
+        XCTAssertEqual(presenterMovie.movieName(at: IndexPath(row: 1, section: 0)), "Top Gun: Maverick")
+        
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func test_movie_detail() {
+        
+        interactorMovieDetail.movieReviewVM = [MovieReview(author: "John", rating: 7, review: "Lorem ipsum dolor sit amet"), MovieReview(author: "Thomas", rating: 9, review: "Good"), MovieReview(author: "Joko", rating: 2, review: "Bad")]
+        XCTAssertEqual(presenterMovieDetail.reviewTotal(), 3)
+        XCTAssertNotNil(presenterMovieDetail.getMovieReviewVM())
+        XCTAssertEqual(presenterMovieDetail.getMovieReviewVM()[0].author, "John")
+        
     }
-
+    
+    
 }
