@@ -17,7 +17,6 @@ class MovieByGenreView: UIViewController, MovieByGenreViewProtocol, UITableViewD
     
     var genreID: Int!
     var presenter: MovieByGenrePresenterInput!
-    var data = [String]()
     
     private let tableView: UITableView = {
         let table = UITableView()
