@@ -9,7 +9,6 @@ import Foundation
 
 protocol MovieDetailPresenterInput {
     var interactor: MovieDetailInteractorProtocol! { get set }
-    var view: MovieDetailViewProtocol! { get set }
     var router: MovieDetailRouterProtocol! { get set }
     
     func fetchMovieDetail(for movieID: Int)
@@ -20,6 +19,8 @@ protocol MovieDetailPresenterInput {
 }
 
 protocol MovieDetailPresenterOutput {
+    var view: MovieDetailViewProtocol! { get set }
+    
     func updateData(vm: MovieDetail)
     func updateDataReview()
     func updateYoutubeTrailer(key: YoutubeTrailer)

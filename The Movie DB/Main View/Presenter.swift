@@ -9,7 +9,6 @@ import Foundation
 
 protocol MoviePresenterInput {
     var interactor: MovieInteractorProtocol! { get set }
-    var view: MovieViewProtocol! { get set }
     var router: MovieRouterProtocol! { get set }
     
     func fetchGenre()
@@ -19,6 +18,8 @@ protocol MoviePresenterInput {
 }
 
 protocol MoviePresenterOutput {
+    
+    var view: MovieViewProtocol! { get set }
     func reloadGenre()
     func discoverMovieByGenre(_ genreID: Int)
 }

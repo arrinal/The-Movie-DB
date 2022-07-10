@@ -28,7 +28,6 @@ class MovieByGenreRouter: MovieByGenreRouterProtocol {
         view.presenter = presenter
         interactor.presenter = presenter
         presenter.router = router
-        presenter.view = view
         presenter.interactor = interactor
         
         router.entry = view

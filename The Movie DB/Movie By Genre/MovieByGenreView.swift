@@ -7,13 +7,7 @@
 
 import UIKit
 
-protocol MovieByGenreViewProtocol {
-    
-    func reloadMovie()
-    
-}
-
-class MovieByGenreView: UIViewController, MovieByGenreViewProtocol, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
+class MovieByGenreView: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
     
     var genreID: Int!
     var presenter: MovieByGenrePresenterInput!
@@ -55,11 +49,6 @@ class MovieByGenreView: UIViewController, MovieByGenreViewProtocol, UITableViewD
         tableView.delegate = self
         tableView.dataSource = self
         
-    }
-    
-    
-    func reloadMovie() {
-        tableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

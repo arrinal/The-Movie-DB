@@ -9,7 +9,6 @@ import Foundation
 
 protocol MovieByGenrePresenterInput {
     var interactor: MovieByGenreInteractorProtocol! { get set }
-    var view: MovieByGenreViewProtocol! { get set }
     var router: MovieByGenreRouterProtocol! { get set }
     
     func fetchMovie(pagination: Bool, for genreID: Int, completion: @escaping (Result<[Movie], Error>) -> Void)
@@ -21,7 +20,6 @@ protocol MovieByGenrePresenterInput {
 }
 
 protocol MovieByGenrePresenterOutput {
-    func reloadMovie()
     func pushToMovieDetail(id: Int)
     
 }
@@ -29,7 +27,6 @@ protocol MovieByGenrePresenterOutput {
 class MovieByGenrePresenter: MovieByGenrePresenterInput {
     
     var interactor: MovieByGenreInteractorProtocol!
-    var view: MovieByGenreViewProtocol!
     var router: MovieByGenreRouterProtocol!
     
 }
@@ -62,9 +59,6 @@ extension MovieByGenrePresenter {
 }
 
 extension MovieByGenrePresenter: MovieByGenrePresenterOutput {
-    func reloadMovie() {
-        view.reloadMovie()
-    }
     
     func pushToMovieDetail(id: Int) {
         router.pushToMovieDetail(id: id)
