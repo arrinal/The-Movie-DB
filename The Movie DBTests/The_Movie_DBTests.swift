@@ -18,7 +18,6 @@ class The_Movie_DBTests: XCTestCase {
     var presenterMovie: MovieByGenrePresenterInput & MovieByGenrePresenterOutput = MovieByGenrePresenter()
     var interactorMovie: MovieByGenreInteractorProtocol! = MovieByGenreInteractor()
     var routerMovie: MovieByGenreRouterProtocol! = MovieByGenreRouter()
-    var viewMovie: MovieByGenreViewProtocol! = MovieByGenreView()
     
     var presenterMovieDetail: MovieDetailPresenterInput & MovieDetailPresenterOutput = MovieDetailPresenter()
     var interactorMovieDetail: MovieDetailInteractorProtocol! = MovieDetailInteractor()
@@ -36,7 +35,6 @@ class The_Movie_DBTests: XCTestCase {
         self.interactorMovie.presenter = presenterMovie
         self.presenterMovie.router = routerMovie
         self.presenterMovie.interactor = interactorMovie
-        self.presenterMovie.view = viewMovie
         
         self.interactorMovieDetail.presenter = presenterMovieDetail
         self.presenterMovieDetail.router = routerMovieDetail
